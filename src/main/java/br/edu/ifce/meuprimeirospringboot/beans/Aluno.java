@@ -1,9 +1,11 @@
 package br.edu.ifce.meuprimeirospringboot.beans;
 
+import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Aluno {
@@ -13,6 +15,9 @@ public class Aluno {
     private Long id;
     private String nome;
     private String matricula;
+    
+    @ManyToMany(mappedBy = "alunos")
+    private List<Turma> turmas;
 
     public Long getId() {
         return id;
@@ -36,5 +41,13 @@ public class Aluno {
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
+    }
+
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
     }
 }

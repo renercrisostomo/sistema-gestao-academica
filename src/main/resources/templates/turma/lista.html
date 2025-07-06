@@ -42,29 +42,38 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Código</th>
+                                <th>Nome</th>
                                 <th>Disciplina</th>
                                 <th>Professor</th>
                                 <th>Horário</th>
                                 <th>Sala</th>
-                                <th>Vagas</th>
+                                <th>Vagas Disponíveis</th>
+                                <th>Vagas Total</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="turma : ${turmas}">
                                 <td th:text="${turma.id}"></td>
-                                <td th:text="${turma.codigo}"></td>
+                                <td th:text="${turma.nome}"></td>
                                 <td th:text="${turma.disciplina.nome}"></td>
                                 <td th:text="${turma.professor.nome}"></td>
                                 <td th:text="${turma.horario}"></td>
                                 <td th:text="${turma.sala}"></td>
-                                <td th:text="${turma.vagas}"></td>
+                                <td th:text="${turma.vagasDisponiveis}"></td>
+                                <td th:text="${turma.vagasTotal}"></td>
                                 <td>
+                                    <a th:href="@{/turmas/{id}/matricula(id=${turma.id})}"
+                                        class="btn btn-sm btn-primary">Matricular Alunos</a>
+                                    <a th:href="@{/turmas/{id}/alunos(id=${turma.id})}"
+                                        class="btn btn-sm btn-info">Ver Alunos</a>
                                     <a th:href="@{/turmas/editar/{id}(id=${turma.id})}"
-                                        class="btn btn-sm btn-info">Editar</a>
+                                        class="btn btn-sm btn-warning">Editar</a>
                                     <a th:href="@{/turmas/deletar/{id}(id=${turma.id})}"
-                                        class="btn btn-sm btn-danger">Deletar</a>
+                                        class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Tem certeza que deseja excluir esta turma?')">
+                                        Deletar
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>

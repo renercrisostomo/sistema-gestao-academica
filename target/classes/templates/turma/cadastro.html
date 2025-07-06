@@ -37,8 +37,8 @@
                     <input type="hidden" th:field="*{id}" />
                     
                     <div class="mb-3">
-                        <label for="codigo" class="form-label">Código da Turma</label>
-                        <input type="text" class="form-control" id="codigo" th:field="*{codigo}" required>
+                        <label for="nome" class="form-label">Nome da Turma</label>
+                        <input type="text" class="form-control" id="nome" th:field="*{nome}" required>
                     </div>
 
                     <div class="mb-3">
@@ -69,17 +69,17 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="vagas" class="form-label">Número de Vagas</label>
-                        <input type="number" class="form-control" id="vagas" th:field="*{vagas}" required>
-                    </div>
-
-                    <div class="mb-3">
                         <label for="sala" class="form-label">Sala</label>
                         <input type="text" class="form-control" id="sala" th:field="*{sala}" required>
                     </div>
 
+                    <div class="mb-3">
+                        <label for="vagasTotal" class="form-label">Total de Vagas</label>
+                        <input type="number" class="form-control" id="vagasTotal" th:field="*{vagasTotal}" required min="1">
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Salvar</button>
-                    <a href="/turmas" class="btn btn-secondary">Cancelar</a>
+                    <a th:href="@{/turmas}" class="btn btn-secondary">Cancelar</a>
                 </form>
             </div>
         </section>
@@ -98,5 +98,4 @@
         });
     </script>
 </body>
-
 </html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Matricular Alunos - TJW</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" th:href="@{/image/favicon.ico}" />
+
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css}" rel="stylesheet" />
+
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/cadastro.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <header th:replace="~{home :: page_header}"></header>
+
+    <div class="layout-main">
+        <section class="layout-content">
+            <div class="container" id="form-cadastro">
+                <h2>Matricular Alunos na Turma</h2>
+
+                <div th:if="${erro}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <span th:text="${erro}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <div th:if="${sucesso}" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <span th:text="${sucesso}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h4 class="card-title">Informações da Turma</h4>
+                        <p><strong>Disciplina:</strong> <span th:text="${turma.disciplina.nome}"></span></p>
+                        <p><strong>Professor:</strong> <span th:text="${turma.professor.nome}"></span></p>
+                        <p><strong>Vagas Disponíveis:</strong> <span th:text="${turma.vagasDisponiveis}"></span></p>
+                        <p><strong>Vagas Total:</strong> <span th:text="${turma.vagasTotal}"></span></p>
+                    </div>
+                </div>
+
+                <div class="btn-group mb-3" role="group">
+                    <a th:href="@{/turmas/{id}/alunos(id=${turma.id})}" class="btn btn-secondary">
+                        <span class="oi oi-arrow-left" title="Voltar" aria-hidden="true"></span>
+                        <span>Voltar</span>
+                    </a>
+                </div>
+
+                <form th:action="@{/turmas/{id}/matricular(id=${turma.id})}" method="post" id="formMatricula" onsubmit="return validarForm()">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Selecionar</th>
+                                    <th>Nome</th>
+                                    <th>Matrícula</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:if="${#lists.isEmpty(alunos)}">
+                                    <td colspan="3" class="text-center">Não há alunos disponíveis para matrícula</td>
+                                </tr>
+                                <tr th:each="aluno : ${alunos}">
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="alunoIds"
+                                                th:value="${aluno.id}" th:id="'aluno-' + ${aluno.id}">
+                                        </div>
+                                    </td>
+                                    <td th:text="${aluno.nome}"></td>
+                                    <td th:text="${aluno.matricula}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-primary" th:disabled="${#lists.isEmpty(alunos)}">
+                            <span class="oi oi-check" title="Salvar" aria-hidden="true"></span>
+                            <span>Confirmar Matrículas</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+
+        function validarForm() {
+            var checkboxes = document.getElementsByName('alunoIds');
+            var selecionado = false;
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    selecionado = true;
+                    break;
+                }
+            }
+            
+            if (!selecionado) {
+                alert('Por favor, selecione pelo menos um aluno para matricular.');
+                return false;
+            }
+            
+            return true;
+        }
+    </script>
+</body>
+
+</html>

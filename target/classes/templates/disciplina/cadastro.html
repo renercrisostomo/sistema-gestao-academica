@@ -48,8 +48,12 @@
                         <input type="text" class="form-control" id="periodo" th:field="*{periodo}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="professor" class="form-label">Professor</label>
-                        <input type="text" class="form-control" id="professor" th:field="*{professor}" required>
+                        <label for="descricao" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="descricao" th:field="*{descricao}" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cargaHoraria" class="form-label">Carga Horária</label>
+                        <input type="number" class="form-control" id="cargaHoraria" th:field="*{cargaHoraria}" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Salvar</button>
                     <a href="/disciplinas" class="btn btn-secondary">Cancelar</a>

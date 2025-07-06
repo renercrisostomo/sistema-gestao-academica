@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.ifce.meuprimeirospringboot.beans.Disciplina;
 import br.edu.ifce.meuprimeirospringboot.service.DisciplinaService;
+import br.edu.ifce.meuprimeirospringboot.service.ProfessorService;
 
 @Controller
 @RequestMapping("/disciplinas")
@@ -17,6 +18,9 @@ public class DisciplinaController {
 
     @Autowired
     private DisciplinaService disciplinaService;
+    
+    @Autowired
+    private ProfessorService professorService;
 
     @GetMapping
     public String listarDisciplinas(Model model) {
@@ -27,6 +31,7 @@ public class DisciplinaController {
     @GetMapping("/novo")
     public String novaDisciplinaForm(Model model) {
         model.addAttribute("disciplina", new Disciplina());
+        model.addAttribute("professores", professorService.buscarTodos());
         return "disciplina/cadastro";
     }
 
@@ -39,6 +44,7 @@ public class DisciplinaController {
     @GetMapping("/editar/{id}")
     public String editarDisciplinaForm(@PathVariable Long id, Model model) {
         model.addAttribute("disciplina", disciplinaService.buscarPorId(id));
+        model.addAttribute("professores", professorService.buscarTodos());
         return "disciplina/cadastro";
     }
 

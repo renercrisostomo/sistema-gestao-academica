@@ -16,5 +16,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleUsuarioNaoEncontrado(UsuarioNaoEncontradoException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
+    
+    @ExceptionHandler(TurmaNaoEncontradaException.class)
+    public ResponseEntity<String> handleTurmaNaoEncontrada(TurmaNaoEncontradaException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
 }
 

@@ -1,19 +1,27 @@
 package br.edu.ifce.meuprimeirospringboot.beans;
 
+import java.util.ArrayList;
+import java.util.List;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
 
 @Entity
 public class Turma {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String codigo;
+    private String nome;
+    private String horario;
+    private String sala;
+    private Integer vagasTotal;
+    private Integer vagasDisponiveis;
     
     @ManyToOne
     private Disciplina disciplina;
@@ -21,11 +29,13 @@ public class Turma {
     @ManyToOne
     private Professor professor;
     
-    private String horario;
-    
-    private Integer vagas;
-    
-    private String sala;
+    @ManyToMany
+    @JoinTable(
+        name = "turma_aluno",
+        joinColumns = @JoinColumn(name = "turma_id"),
+        inverseJoinColumns = @JoinColumn(name = "aluno_id")
+    )
+    private List<Aluno> alunos = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -35,12 +45,44 @@ public class Turma {
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
+
+    public String getSala() {
+        return sala;
+    }
+
+    public void setSala(String sala) {
+        this.sala = sala;
+    }
+
+    public Integer getVagasTotal() {
+        return vagasTotal;
+    }
+
+    public void setVagasTotal(Integer vagasTotal) {
+        this.vagasTotal = vagasTotal;
+    }
+
+    public Integer getVagasDisponiveis() {
+        return vagasDisponiveis;
+    }
+
+    public void setVagasDisponiveis(Integer vagasDisponiveis) {
+        this.vagasDisponiveis = vagasDisponiveis;
     }
 
     public Disciplina getDisciplina() {
@@ -59,27 +101,11 @@ public class Turma {
         this.professor = professor;
     }
 
-    public String getHorario() {
-        return horario;
+    public List<Aluno> getAlunos() {
+        return alunos;
     }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
-
-    public Integer getVagas() {
-        return vagas;
-    }
-
-    public void setVagas(Integer vagas) {
-        this.vagas = vagas;
-    }
-
-    public String getSala() {
-        return sala;
-    }
-
-    public void setSala(String sala) {
-        this.sala = sala;
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
     }
 }
