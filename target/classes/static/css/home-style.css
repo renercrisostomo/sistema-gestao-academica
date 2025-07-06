@@ -1,0 +1,79 @@
+/* Estilos modernos para home.html */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', sans-serif;
+}
+.navbar {
+    background: linear-gradient(135deg, #A50, #A50);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: white !important;
+}
+.navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+.navbar-nav .nav-link:hover {
+    color: white !important;
+}
+.navbar-nav.flex-row {
+    margin: 0 auto;
+}
+.sidebar {
+    background-color: #ffffff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+.card-header {
+    background: linear-gradient(135deg, #A50, #A50);
+    color: white;
+    border-radius: 10px 10px 0 0;
+    font-weight: bold;
+}
+.dropdown-menu {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.dropdown-item {
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.dropdown-item:hover {
+    background-color: #A50;
+    color: white;
+}
+.layout-content {
+    padding: 20px;
+    /* background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px; */
+}
+
+/* Styles specific to the home page */
+
+.home-container h1 {
+    text-align: left;
+    margin-bottom: 30px;
+    font-weight: 600;
+    color: #000000;
+}
+
+/* .container padding-top is now handled by the general .container rule in style.css if desired,
+   or can be kept here if home page needs a different top padding for its main container. 
+   For now, assuming general style.css .container rule is sufficient or will be adjusted.
+*/

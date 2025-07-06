@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Lista de Usuários - TJW</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<link rel="icon" th:href="@{/image/favicon.ico}" />
+
+	<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+	<link th:href="@{/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css}" rel="stylesheet" />
+
+	<link th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+
+<body>
+	<header th:replace="~{home :: page_header}"></header>
+
+	<div class="layout-main">
+
+		<section class="layout-content">
+			<h2>Listagem de Usuários</h2>
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+
+				<a class="btn btn-primary btn-md" th:href="@{/usuarios/cadastrar}" role="button">
+					<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
+					<span>Cadastrar Usuário</span>
+				</a>
+			</div>
+
+			<div class="container">
+				<div th:if="${sucesso}" class="alert alert-success alert-dismissible fade show" role="alert">
+					<span th:text="${sucesso}"></span>
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+				<div th:if="${erro}" class="alert alert-danger alert-dismissible fade show" role="alert">
+					<span th:text="${erro}"></span>
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+
+				<div class="table-responsive">
+					<table class="table table-striped table-hover table-sm">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nome Completo</th>
+								<th>E-mail</th>
+								<th>CPF</th>
+								<th>Data de Nascimento</th>
+								<th>Raça</th>
+								<th>Ação</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="usuario : ${usuarios}">
+								<td th:text="${usuario.id}">1</td>
+								<td th:text="${usuario.nome}">Fulano de Tal</td>
+								<td th:text="${usuario.email}">fulano@gmail.com</td>
+								<td th:text="${usuario.cpf}">000.000.000-00</td>
+								<td th:text="${#dates.format(usuario.dtNascimento, 'dd/MM/yyyy')}">01/01/2000</td>
+								<td th:text="${usuario.raca}">Não Informada</td>
+								<td colspan="2">
+									<a class="btn btn-info btn-sm" th:href="@{/usuarios/editar/{id} (id=${usuario.id})}" role="button">
+										<span class="oi oi-brush" title="Editar" aria-hidden="true"></span> Editar
+									</a>
+
+									<a class="btn btn-danger btn-sm" th:href="@{/usuarios/excluir/{id} (id=${usuario.id})}" role="button"
+									   onclick="return confirm('Tem certeza que deseja excluir este usuário?');">
+										<span class="oi oi-trash" title="Excluir" aria-hidden="true"></span> Excluir
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<!-- Bootstrap core JavaScript
+================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script> <!-- Includes Popper -->
+	<script type="text/javascript">
+		$(function () {
+			$('[data-toggle="popover"]').popover();
+		});
+
+		// Removed sidebar toggle script:
+		// $(document).ready(function () {
+		// 	$(".navbar-toggle").click(function () {
+		// 		$(".sidebar").toggleClass("sidebar-open");
+		// 	})
+		// });
+	</script>
+</body>
+
+</html>

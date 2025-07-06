@@ -1,0 +1,21 @@
+/* Styles specific to the registration form page */
+
+#form-cadastro {
+    max-width: 600px;
+    margin: 100px auto 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#form-cadastro h2 {
+    text-align: left;
+    margin-bottom: 30px;
+    font-weight: 600;
+    color: #000000;
+}
+
+#form-cadastro .form-group {
+    margin-bottom: 20px;
+}

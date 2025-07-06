@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head th:fragment="page_head">
+		<title>TJW</title>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<link rel="icon" th:href="@{/image/favicon.ico}" />
+
+		<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+		<link th:href="@{/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css}" rel="stylesheet" />
+
+		<link th:href="@{/css/style.css}" rel="stylesheet" />
+		<link th:href="@{/css/cadastro.css}" rel="stylesheet" />
+	</head>
+<body>
+	<header th:replace="~{home :: page_header}"></header>
+
+
+    <div class="layout-main">
+
+        <section class="layout-content">
+
+			<div class="container" id="form-cadastro">
+			    <h2 th:text="${usuario.id == null ? 'Cadastro de Usuário' : 'Edição de Usuário'}">Cadastro de Usuário</h2>
+
+			    <div th:if="${erro}" class="alert alert-danger">
+			        <span th:text="${erro}"></span>
+			    </div>
+
+			    <div th:if="${sucesso}" class="alert alert-success">
+			        <span th:text="${sucesso}"></span>
+			    </div>
+
+			    <form th:action="${usuario.id == null ? '/usuarios/salvar' : '/usuarios/editar'}" method="POST" th:object="${usuario}">
+			        <div class="row">	       
+						<div class="form-group col-md-12">
+							<label for="nome">Nome Completo</label>
+							<input type="text" class="form-control" id="nome" placeholder="Nome Completo" th:field="*{nome}" required/>
+						</div>
+			            <div class="form-group col-md-12">
+			                <label for="email">E-mail</label>
+			                <input type="email" class="form-control" id="email" placeholder="E-mail" th:field="*{email}" required/>
+			            </div>
+			            <div class="form-group col-md-6">
+			                <label for="cpf">CPF</label>
+			                <input type="text" class="form-control" id="cpf" placeholder="CPF" th:field="*{cpf}" required />
+			            </div>
+			            <div class="form-group col-md-6">
+			                <label for="dtNascimento">Data de Nascimento</label>
+			                <input type="date" class="form-control" id="dtNascimento" placeholder="Data de Nascimento" th:field="*{dtNascimento}" required />
+			            </div>
+			            <div class="form-group col-md-6">
+			                <label for="raca">Raça</label>
+			                <select class="form-control" id="raca" th:field="*{raca}" required>
+			                    <option value="">Selecione...</option>
+			                    <option th:each="r : ${racas}" th:value="${r}" th:text="${r}"></option>
+			                </select>
+			            </div>
+			        </div>
+			        <input type="hidden" th:field="*{id}" />
+			        <div class="text-end mt-3">
+			            <button type="submit" class="btn btn-primary">Salvar</button>
+			            <a th:href="@{/usuarios}" class="btn btn-secondary">Cancelar</a>
+			        </div>
+			    </form>
+			</div>
+
+        </section>
+    </div>
+
+    <!-- <footer class="layout-footer">
+        <div class="container"></div>
+    </footer> -->
+	
+	
+
+    <!-- Scripts -->
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+        $(".navbar-toggler").click(function () {
+            $(".sidebar").toggleClass("sidebar-open");
+        });
+		
+		$(document).ready(function() {
+				      $('#cpf').mask('000.000.000-00', {reverse: true});
+		});
+		
+    </script>
+</body>
+</html>
