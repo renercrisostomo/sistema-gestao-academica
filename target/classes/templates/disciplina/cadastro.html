@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="page_head">
+    <title>TJW</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" th:href="@{/image/favicon.ico}" />
+
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css}" rel="stylesheet" />
+
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/cadastro.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <header th:replace="~{home :: page_header}"></header>
+
+    <div class="layout-main">
+        <section class="layout-content">
+            <div class="container" id="form-cadastro">
+                <h2 th:text="${disciplina.id == null ? 'Cadastro de Disciplina' : 'Edição de Disciplina'}">Cadastro de Disciplina</h2>
+
+                <div th:if="${erro}" class="alert alert-danger">
+                    <span th:text="${erro}"></span>
+                </div>
+
+                <div th:if="${sucesso}" class="alert alert-success">
+                    <span th:text="${sucesso}"></span>
+                </div>
+
+                <form th:action="@{/disciplinas}" th:object="${disciplina}" method="post">
+                    <input type="hidden" th:field="*{id}" />
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="nome" th:field="*{nome}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ano" class="form-label">Ano</label>
+                        <input type="text" class="form-control" id="ano" th:field="*{ano}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="periodo" class="form-label">Período</label>
+                        <input type="text" class="form-control" id="periodo" th:field="*{periodo}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="professor" class="form-label">Professor</label>
+                        <input type="text" class="form-control" id="professor" th:field="*{professor}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a href="/disciplinas" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+        
+        $(".navbar-toggler").click(function () {
+            $(".sidebar").toggleClass("sidebar-open");
+        });
+    </script>
+</body>
+
+</html>
