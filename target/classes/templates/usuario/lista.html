@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<title>Lista de Usuários - TJW</title>
@@ -67,7 +66,7 @@
 									</a>
 
 									<a class="btn btn-danger btn-sm" th:href="@{/usuarios/excluir/{id} (id=${usuario.id})}" role="button"
-									   onclick="return confirm('Tem certeza que deseja excluir este usuário?');">
+										onclick="return confirm('Tem certeza que deseja excluir este usuário?');">
 										<span class="oi oi-trash" title="Excluir" aria-hidden="true"></span> Excluir
 									</a>
 								</td>

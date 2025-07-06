@@ -10,6 +10,7 @@ body {
 	font-family: 'Segoe UI', sans-serif;
 	/* padding-top: 56px; */
 	padding-left: 0;
+	margin: 0;
 } 
 
 /*
@@ -142,8 +143,10 @@ h2 {
 
 /* Added from home-style.css and cadastro.css - Common Modern Styles */
 .navbar {
-    background: linear-gradient(135deg, #A50, #A50);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	background: linear-gradient(135deg, #A50, #A50);
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	padding-block: 8px;
+	padding-inline: 6px;
 }
 
 .navbar-brand {

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="page_head">
+    <title>TJW</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" th:href="@{/image/favicon.ico}" />
+
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css}" rel="stylesheet" />
+
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/cadastro.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <header th:replace="~{home :: page_header}"></header>
+
+
+    <div class="layout-main">
+
+		<section class="layout-content">
+
+			<div class="container" id="form-cadastro">
+				<h2 th:text="${aluno.id == null ? 'Cadastro de Aluno' : 'Edição de Aluno'}">Cadastro de Aluno</h2>
+
+				<div th:if="${erro}" class="alert alert-danger">
+					<span th:text="${erro}"></span>
+				</div>
+
+				<div th:if="${sucesso}" class="alert alert-success">
+					<span th:text="${sucesso}"></span>
+				</div>
+                <form th:action="@{/alunos}" th:object="${aluno}" method="post">
+                    <input type="hidden" th:field="*{id}" />
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="nome" th:field="*{nome}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="matricula" class="form-label">Matrícula</label>
+                        <input type="text" class="form-control" id="matricula" th:field="*{matricula}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a href="/alunos" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+
+        </section>
+    </div>
+
+    <!-- <footer class="layout-footer">
+        <div class="container"></div>
+    </footer> -->
+
+
+
+    <!-- Scripts -->
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+        $(".navbar-toggler").click(function () {
+            $(".sidebar").toggleClass("sidebar-open");
+        });
+
+        $(document).ready(function () {
+            $('#cpf').mask('000.000.000-00', { reverse: true });
+        });
+
+    </script>
+</body>
+
+</html>
